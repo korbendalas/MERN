@@ -29,6 +29,9 @@
     "validator": "^9.4.1",
     "yup": "^0.27.0"
   },
+  "engines": {
+    "node": "10.15.3"
+  },
   "devDependencies": {
     "nodemon": "^1.17.3"
   }
