@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { authRequest, authResponse } from "../interceptors/index";
 
-const production = "https://enigmatic-tundra-96716.herokuapp.com";
+const production = "https://enigmatic-tundra-96716.herokuapp.com/";
 const development = "http://localhost:5000";
 
 const url = process.env.NODE_ENV ? production : development;
