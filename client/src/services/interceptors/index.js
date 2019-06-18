@@ -1,4 +1,4 @@
-import store from "@/store";
+import store from "@/user/store";
 
 export function authRequest(config) {
   const token = localStorage.getItem("access_token");

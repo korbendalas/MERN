@@ -1,35 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { getProfile, deleteProfile } from "@actions/auth";
+import { useSelector, useDispatch } from "react-redux";
+import { getProfile, deleteProfile } from "@actions/actions";
 import { deleteExperience, deleteEducation } from "@endpoints/user";
 import { Link } from "react-router-dom";
 import history from "@history";
 
 const Dashboard = ({ user, ...props }) => {
-  const [changedData, setChangedData] = useState(false);
+  const responseErrors = useSelector(state => state.user.responseErrors);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    props.getProfile();
+    dispatch(getProfile());
   }, []);
+
   console.log("DASHBOARD PROPS", user);
 
-  const deleteExperienceOnClick = async id => {
-    const { data, error } = await deleteExperience(id);
-    props.getProfile();
+  // const deleteExperienceOnClick = async id => {
+  //   const { data, error } = await deleteExperience(id);
+  //   dispatch(getProfile());
 
-    if (data) {
-      props.getProfile();
-    } else if (error) {
-    }
-  };
+  //   if (error) {
+  //   console.log(error)
+  //   }
+  // };
   // ################# NOT GOOD BUT WORKS! #########################
 
-  const deleteEducationOnClick = async id => {
-    const { data, error } = await deleteEducation(id);
-    if (data) {
-      props.getProfile();
-    }
-  };
+  // const deleteEducationOnClick = async id => {
+  //   const { data, error } = await deleteEducation(id);
+  //   if (data) {
+  //     props.getProfile();
+  //   }
+  // };
 
   return (
     <>
@@ -39,6 +40,7 @@ const Dashboard = ({ user, ...props }) => {
           <Link to="/create-profile" className="btn btn-light">
             <i className="fas fa-user-circle text-primary" /> Create Profile
           </Link>
+          {Object.keys(user).length ? console.log(user.profile) : null}
         </div>
       ) : (
         <>
@@ -79,7 +81,7 @@ const Dashboard = ({ user, ...props }) => {
                       </td>
                       <td>
                         <button
-                          onClick={() => deleteExperienceOnClick(exp._id)}
+                          // onClick={() => deleteExperienceOnClick(exp._id)}
                           className="btn btn-danger"
                         >
                           Delete
@@ -121,7 +123,7 @@ const Dashboard = ({ user, ...props }) => {
                       </td>
                       <td>
                         <button
-                          onClick={() => deleteEducationOnClick(edu._id)}
+                          // onClick={() => deleteEducationOnClick(edu._id)}
                           className="btn btn-danger"
                         >
                           Delete
@@ -148,11 +150,4 @@ const Dashboard = ({ user, ...props }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return { user: state.user };
-};
-
-export default connect(
-  mapStateToProps,
-  { getProfile, deleteProfile }
-)(Dashboard);
+export default Dashboard;

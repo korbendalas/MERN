@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { logOut } from "@actions/auth";
+
+import { logOut } from "@actions/actions";
 import history from "@history";
+import { useSelector, useDispatch } from "react-redux";
+import { userInfo } from "os";
 
 const Navbar = props => {
+  const isAuthenticated = useSelector(state => state.user.isAuthenticated);
   return (
     <nav className="navbar bg-dark">
-      {props.isAuthenticated ? (
+      {isAuthenticated ? (
         <h1>
           <Link to="/posts">
             <i className="fas fa-code" /> DevConnector
@@ -25,7 +28,7 @@ const Navbar = props => {
           <Link to="/profiles">Developers</Link>
         </li>
 
-        {props.isAuthenticated === true ? (
+        {isAuthenticated === true ? (
           <>
             <li>
               <Link to="/dashboard">
@@ -33,7 +36,7 @@ const Navbar = props => {
               </Link>
             </li>
             <li>
-              <Link onClick={() => props.logOut(history)} to="#">
+              <Link onClick={() => logOut(history)} to="#">
                 <i className="fas fa-sign-out-alt" /> Logout
               </Link>
             </li>
@@ -54,11 +57,4 @@ const Navbar = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return { isAuthenticated: state.isAuthenticated.isAuthenticated };
-};
-
-export default connect(
-  mapStateToProps,
-  { logOut }
-)(Navbar);
+export default Navbar;

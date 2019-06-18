@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 const Landing = () => {
   return (
     <section className="landing">
@@ -14,6 +15,7 @@ const Landing = () => {
             <Link to="/register" className="btn btn-primary">
               Sign Up
             </Link>
+
             <Link to="/login" className="btn btn-light">
               Login
             </Link>

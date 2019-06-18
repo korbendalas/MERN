@@ -5,8 +5,8 @@ module.exports = {
     alias: {
       "@": path.resolve(__dirname, "src"),
       "@components": path.resolve(__dirname, "src/components"),
-      "@actions": path.resolve(__dirname, "src/actions"),
-      "@reducers": path.resolve(__dirname, "src/reducers"),
+      "@actions": path.resolve(__dirname, "src/user/actions"),
+      "@reducers": path.resolve(__dirname, "src/user/reducers"),
       "@toResponse": path.resolve(__dirname, "src/to-response"),
       "@services": path.resolve(__dirname, "src/services"),
       "@endpoints": path.resolve(__dirname, "src/endpoints"),
