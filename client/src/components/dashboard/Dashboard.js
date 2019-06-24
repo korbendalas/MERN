@@ -5,15 +5,17 @@ import { deleteExperience, deleteEducation } from "@endpoints/user";
 import { Link } from "react-router-dom";
 import history from "@history";
 
-const Dashboard = ({ user, ...props }) => {
+const Dashboard = props => {
   const responseErrors = useSelector(state => state.user.responseErrors);
+  const hasSetProfile = useSelector(state => state.user.hasSetProfile);
+  const info = useSelector(state => state.user.info);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getProfile());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getProfile());
+  // }, []);
 
-  console.log("DASHBOARD PROPS", user);
+  //console.log("DASHBOARD PROPS", user);
 
   // const deleteExperienceOnClick = async id => {
   //   const { data, error } = await deleteExperience(id);
@@ -34,19 +36,18 @@ const Dashboard = ({ user, ...props }) => {
 
   return (
     <>
-      {!user.hasSetProfile ? (
+      {!hasSetProfile ? (
         <div>
           <p>You need to setup your profile</p>
           <Link to="/create-profile" className="btn btn-light">
             <i className="fas fa-user-circle text-primary" /> Create Profile
           </Link>
-          {Object.keys(user).length ? console.log(user.profile) : null}
         </div>
-      ) : (
+      ) : Object.keys(info).length ? (
         <>
           <h1 className="large text-primary">Dashboard</h1>
           <p className="lead">
-            <i className="fas fa-user" /> Welcome {user.profile.user.name}
+            <i className="fas fa-user" /> Welcome {info.user.name}
           </p>
           <div className="dash-buttons">
             <Link to="/edit-profile" className="btn btn-light">
@@ -71,8 +72,8 @@ const Dashboard = ({ user, ...props }) => {
               </tr>
             </thead>
             <tbody>
-              {Object.keys(user.profile).length
-                ? user.profile.experience.map(exp => (
+              {Object.keys(info).length
+                ? info.experience.map(exp => (
                     <tr key={exp._id}>
                       <td>{exp.company}</td>
                       <td className="hide-sm">{exp.title}</td>
@@ -113,8 +114,8 @@ const Dashboard = ({ user, ...props }) => {
               </tr>
             </thead>
             <tbody>
-              {Object.keys(user.profile).length
-                ? user.profile.education.map(edu => (
+              {Object.keys(info).length
+                ? info.education.map(edu => (
                     <tr key={edu._id}>
                       <td>{edu.school}</td>
                       <td className="hide-sm">{edu.degree}</td>
@@ -145,6 +146,8 @@ const Dashboard = ({ user, ...props }) => {
             </button>
           </div>
         </>
+      ) : (
+        "SPINNER"
       )}
     </>
   );

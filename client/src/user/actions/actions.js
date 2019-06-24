@@ -62,6 +62,7 @@ export const login = (credentials, history) => async dispatch => {
 
 export const logOut = history => async dispatch => {
   localStorage.removeItem("access_token");
+  localStorage.removeItem("user");
   dispatch({ type: DEAUTHENTICATE_USER });
   history.replace("/");
 };
@@ -74,24 +75,24 @@ export const getProfile = () => async dispatch => {
     // info->payload
     localStorage.setItem("user", JSON.stringify(data.data));
   } else if (error.response.status === 404) {
-    dispatch({ type: HAS_SET_PROFILE });
+    dispatch({ type: HAS_NO_PROFILE });
     //default->true
     //hasSetProfile->false
   }
 };
 
-// export const createProfile = (credentials, history) => async dispatch => {
-//   const { data, error } = await createCurrentProfile(credentials);
+export const createProfile = (credentials, history) => async dispatch => {
+  const { data, error } = await createCurrentProfile(credentials);
 
-//   if (data) {
-//     // authenticate(data.data.token);
-//     dispatch({ type: GET_CURRENT_USER, payload: data.data });
-//     if (history) history.replace("/dashboard");
-//   } else if (error) {
-//     // console.log(error.response.data.message);
-//     return Promise.reject(error); //vidi ovo
-//   }
-// };
+  if (data) {
+    // authenticate(data.data.token);
+    dispatch({ type: SAVE_USER_INFO, payload: data.data });
+    if (history) history.replace("/dashboard");
+  } else if (error) {
+    // console.log(error.response.data.message);
+    return Promise.reject(error); //vidi ovo
+  }
+};
 
 export const deleteProfile = history => async dispatch => {
   const { data, error } = await deleteCurrentProfile();

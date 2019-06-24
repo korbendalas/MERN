@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
-import { createProfile, getProfile } from "@actions/auth";
+import { createProfile, getProfile } from "@actions/actions";
 
 const editProfileSchema = Yup.object().shape({
   handle: Yup.string()

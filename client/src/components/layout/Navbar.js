@@ -8,6 +8,7 @@ import { userInfo } from "os";
 
 const Navbar = props => {
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
+  const dispatch = useDispatch();
   return (
     <nav className="navbar bg-dark">
       {isAuthenticated ? (
@@ -36,7 +37,7 @@ const Navbar = props => {
               </Link>
             </li>
             <li>
-              <Link onClick={() => logOut(history)} to="#">
+              <Link onClick={() => dispatch(logOut(history))} to="/">
                 <i className="fas fa-sign-out-alt" /> Logout
               </Link>
             </li>

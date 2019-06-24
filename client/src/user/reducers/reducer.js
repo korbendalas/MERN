@@ -5,7 +5,8 @@ import {
   REGISTER_USER,
   REGISTER_FAIL,
   SAVE_USER_INFO,
-  HAS_SET_PROFILE
+  HAS_SET_PROFILE,
+  HAS_NO_PROFILE
 } from "@actions/types";
 
 import { getToken } from "@services/token";
@@ -41,6 +42,9 @@ export default (state = initialState, action) => {
       return { ...state, info: action.payload }; //overire user from local storage
 
     case HAS_SET_PROFILE:
+      return { ...state, hasSetProfile: true };
+
+    case HAS_NO_PROFILE:
       return { ...state, hasSetProfile: false };
 
     case SAVE_USER_INFO:

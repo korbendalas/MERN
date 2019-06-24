@@ -3,7 +3,7 @@ import { getPosts, addPost } from "@endpoints/posts";
 import { getProfilePublic } from "@endpoints/user";
 import { Link } from "react-router-dom";
 import Post from "./Post";
-import { getProfile } from "@actions/auth";
+import { getProfile } from "@actions/actions";
 
 import { connect } from "react-redux";
 import { Formik, Form } from "formik";

@@ -4,7 +4,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
 import { connect } from "react-redux";
-import { register, resetRegister } from "@actions/auth";
+import { register, resetRegister } from "@actions/actions";
 
 import Alert from "react-s-alert";
 import "react-s-alert/dist/s-alert-default.css"; //obavezan import => core funkcionalnost

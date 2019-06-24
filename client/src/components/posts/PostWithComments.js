@@ -5,7 +5,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import Comment from "./Coment";
 import { connect } from "react-redux";
-import { getProfile } from "@actions/auth";
+import { getProfile } from "@actions/actions";
 const PostWithComments = props => {
   const [post, setPost] = useState(null);
 
